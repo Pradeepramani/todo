@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Todolist from './Components/Todolist/Todolist.jsx';
+import AddTodo from './Components/Addtodo/Addtodo.jsx';
+import './App.css';
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [todoList, setTodoList] = useState([
+        { id: 1, text: "hi", isfinished: true }
+    ]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    function addtodo(title) {
+        setTodoList((prevList) => [
+            ...prevList,
+            { id: Date.now(), text: title, isfinished: false }
+        ]);
+    }
+
+    return (
+        <>
+            <AddTodo addtodo={addtodo} />
+            {/* Pass setTodoList (or setTodolist1) properly */}
+            <Todolist todo={todoList} setTodolist1={setTodoList} /> 
+        </>
+    );
 }
 
-export default App
+export default App;
