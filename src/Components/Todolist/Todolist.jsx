@@ -1,26 +1,36 @@
-import Todo from '../Todo/Todo.jsx';
-
-function Todolist({ todo, setTodolist1 }) { // Destructuring props correctly
-
-    function delete1(id) {
-        console.log('Deleting item with id:', id);  // Debugging line
-        const newtodolist = todo.filter(e => e.id !== id);
-        setTodolist1(newtodolist);  // Using setTodolist1 here
+import Todo from "../Todo/todo.jsx"
+function Todolist({count,setcount1})
+{
+    function deleteid(id)
+    {
+        const data=count.filter((e)=> e.id !== id)
+        setcount1(data)
     }
 
-    return (
+    function edit1(id,newtodo)
+    {
+        const newtodo1=count.map((e)=> {
+            if(e.id === id)
+            {
+                 e.text=newtodo
+            }
+            return newtodo})
+
+            setcount1(newtodo1
+            )
+    }
+
+    return(
         <>
-            {todo.map((item) => (
-                <div key={item.id}>
-                    <Todo
-                        text={item.text}
-                        isfinished={item.isfinished}
-                        deletetodo={() => delete1(item.id)} // Correctly passing the delete function
-                    />
-                </div>
-            ))}
+          {count.map((item,index)=>
+          <div key ={index}>
+            <Todo  text={item.text} id={item.id} delete1={deleteid} edit1={(newtodo)=>edit1(item.id,newtodo)}/>
+            </div>
+          )}
+          
+        
         </>
-    );
+    )
 }
 
-export default Todolist;
+export default Todolist

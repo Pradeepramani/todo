@@ -1,23 +1,19 @@
 import { useState } from "react"
 
-function AddTodo({addtodo})
+function Addtodo({add})
 {
-    const [title,setTitle]=useState('')
-
-    function setthing(e)
+    const [data,setData]=useState("")
+    function changedadd(e)
     {
-    //    (e)=>
-        setTitle(e.target.value)
+         setData(e.target.value)
     }
-return(
-    <>
-    <input type="text" placeholder="Please enter the todo" onChange={setthing} value={title} />
-    {/* <button onSubmit={()=>{addtodo(title);setTitle('') }}>Add</button> */}
-    <button onClick={() => { addtodo(title); setTitle('') }}>Add</button>
+    return(
+        <>
+        <input type="text" onChange={changedadd}/>
+        <button onClick={()=> {add(data) ;setData("")} }>Submit</button>
 
-    
-    </>
-)
+        </>
+    )
 }
 
-export default AddTodo
+export default Addtodo

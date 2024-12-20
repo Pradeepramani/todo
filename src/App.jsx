@@ -1,27 +1,35 @@
-import Todolist from './Components/Todolist/Todolist.jsx';
-import AddTodo from './Components/Addtodo/Addtodo.jsx';
-import './App.css';
-import { useState } from 'react';
+import { useState } from 'react'
+import Todolist from './Components/Todolist/todolist.jsx'
+import Addtodo from './Components/Addtodo/Addtodo.jsx'
+import './App.css'
 
 function App() {
-    const [todoList, setTodoList] = useState([
-        { id: 1, text: "hi", isfinished: true }
-    ]);
-
-    function addtodo(title) {
-        setTodoList((prevList) => [
-            ...prevList,
-            { id: Date.now(), text: title, isfinished: false }
-        ]);
+  const [count, setCount] = useState([
+    {
+        text:"fjfnjfn",id:1
+    },
+    {
+        text:"fjfnjfjnfjjfn",id:2
     }
+  ])
 
-    return (
-        <>
-            <AddTodo addtodo={addtodo} />
-            {/* Pass setTodoList (or setTodolist1) properly */}
-            <Todolist todo={todoList} setTodolist1={setTodoList} /> 
-        </>
-    );
+//   const dtate=
+
+  function add(data)
+  {
+
+  setCount((state)=>[...state,{id:Date.now(),text:data}])
+//   setCount(dtate)
+  }
+  return (
+   
+
+    <>
+     <Addtodo add={add}/>
+    <Todolist count={count} setcount1={setCount}/>
+     
+    </>
+  )
 }
 
-export default App;
+export default App
