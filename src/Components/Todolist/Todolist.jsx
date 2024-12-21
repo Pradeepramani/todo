@@ -1,36 +1,37 @@
-import Todo from "../Todo/todo.jsx"
-function Todolist({count,setcount1})
-{
-    function deleteid(id)
-    {
-        const data=count.filter((e)=> e.id !== id)
-        setcount1(data)
+import { useContext } from "react";
+import Todo from "../Todo/todo.jsx";
+import TodoContext from "../../context/TodoContext.js";
+
+function Todolist() {
+    const { count, dispatch } = useContext(TodoContext); // Ensure correct structure in TodoContext.Provider
+
+    // Delete a todo item by dispatching an action
+    function deleteid(id) {
+        dispatch({ type: "delete_todo", payload: { id } });
     }
 
-    function edit1(id,newtodo)
-    {
-        const newtodo1=count.map((e)=> {
-            if(e.id === id)
-            {
-                 e.text=newtodo
-            }
-            return newtodo})
-
-            setcount1(newtodo1
-            )
+    // Edit a todo item by dispatching an action
+    function edit1(id, newTodo) {
+        dispatch({
+            type: "edit_todo",
+            payload: { id, newTodo }, // Pass newTodo in payload
+        });
     }
 
-    return(
+    return (
         <>
-          {count.map((item,index)=>
-          <div key ={index}>
-            <Todo  text={item.text} id={item.id} delete1={deleteid} edit1={(newtodo)=>edit1(item.id,newtodo)}/>
-            </div>
-          )}
-          
-        
+            {count.map((item) => (
+                <div key={item.id}> {/* Use unique `id` for keys */}
+                    <Todo
+                        text={item.text}
+                        id={item.id}
+                        delete1={() => deleteid(item.id)}
+                        edit1={(newTodo) => edit1(item.id, newTodo)}
+                    />
+                </div>
+            ))}
         </>
-    )
+    );
 }
 
-export default Todolist
+export default Todolist;
